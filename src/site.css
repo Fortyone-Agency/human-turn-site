@@ -184,6 +184,8 @@ p {
 }
 .language-menu summary > span {
   font-size: 19px;
+  line-height: 1;
+  transform: translateY(-3px);
   color: var(--muted);
 }
 .language-menu nav {

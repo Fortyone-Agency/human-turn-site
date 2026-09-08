@@ -23,7 +23,7 @@ export const locales = {
     tour: "Take a closer look",
     eyebrow: "A quieter workflow. A native Mac app.",
     requirement: "For macOS 14 and later",
-    integrations: "Your tools. One place.",
+    integrations: "Your code sources. One place.",
     intro: "Less checking. More doing.",
     screenshots: "Right there in your menu bar.",
     screenshotKicker: "A closer look",
@@ -68,7 +68,7 @@ export const locales = {
     ],
     privacyWeb:
       "This website does not use analytics, advertising cookies, or third-party fonts. Your browser contacts the website host to load these pages and images. Following a Mac App Store link opens an Apple service, which has its own privacy policy.",
-    rights: "Human Turn",
+    rights: "Fortyone Agency LLC",
   },
   de: {
     name: "Deutsch",
@@ -81,7 +81,7 @@ export const locales = {
     tour: "Die App entdecken",
     eyebrow: "Weniger Unterbrechungen. Eine native Mac-App.",
     requirement: "Für macOS 14 oder neuer",
-    integrations: "Deine Tools. Ein Ort.",
+    integrations: "Deine Codequellen. Ein Ort.",
     intro: "Weniger prüfen. Mehr schaffen.",
     screenshots: "Direkt in deiner Menüleiste.",
     screenshotKicker: "Ein genauerer Blick",
@@ -126,7 +126,7 @@ export const locales = {
     ],
     privacyWeb:
       "Diese Website verwendet keine Analysedienste, Werbe-Cookies oder externen Schriftarten. Dein Browser verbindet sich mit dem Website-Host, um Seiten und Bilder zu laden. Links zum Mac App Store öffnen einen Dienst von Apple, für den eigene Datenschutzbestimmungen gelten.",
-    rights: "Human Turn",
+    rights: "Fortyone Agency LLC",
   },
   fr: {
     name: "Français",
@@ -139,7 +139,7 @@ export const locales = {
     tour: "Découvrir l’app",
     eyebrow: "Moins d’interruptions. Une app Mac native.",
     requirement: "Pour macOS 14 ou ultérieur",
-    integrations: "Vos outils. Un seul lieu.",
+    integrations: "Vos sources de code. Un seul lieu.",
     intro: "Moins vérifier. Plus avancer.",
     screenshots: "Dans votre barre des menus.",
     screenshotKicker: "De plus près",
@@ -184,7 +184,7 @@ export const locales = {
     ],
     privacyWeb:
       "Ce site n’utilise ni outils d’analyse, ni cookies publicitaires, ni polices tierces. Votre navigateur contacte l’hébergeur pour charger les pages et les images. Les liens vers le Mac App Store ouvrent un service Apple soumis à sa propre politique de confidentialité.",
-    rights: "Human Turn",
+    rights: "Fortyone Agency LLC",
   },
   es: {
     name: "Español",
@@ -197,7 +197,7 @@ export const locales = {
     tour: "Descubre la app",
     eyebrow: "Menos interrupciones. Una app nativa para Mac.",
     requirement: "Para macOS 14 o posterior",
-    integrations: "Tus herramientas. Un lugar.",
+    integrations: "Tus fuentes de código. Un lugar.",
     intro: "Menos comprobar. Más avanzar.",
     screenshots: "En tu barra de menús.",
     screenshotKicker: "Más de cerca",
@@ -242,7 +242,7 @@ export const locales = {
     ],
     privacyWeb:
       "Este sitio no utiliza herramientas de análisis, cookies publicitarias ni fuentes de terceros. Tu navegador contacta con el alojamiento del sitio para cargar las páginas e imágenes. Los enlaces al Mac App Store abren un servicio de Apple con su propia política de privacidad.",
-    rights: "Human Turn",
+    rights: "Fortyone Agency LLC",
   },
   ja: {
     name: "日本語",
@@ -255,7 +255,7 @@ export const locales = {
     tour: "アプリを見る",
     eyebrow: "作業を静かに見守る、Macネイティブアプリ。",
     requirement: "macOS 14以降に対応",
-    integrations: "いつものツールを、ひとつに。",
+    integrations: "コードの接続先を、ひとつに。",
     intro: "確認を減らして、作業を前へ。",
     screenshots: "メニューバーで、ひと目でわかる。",
     screenshotKicker: "アプリを詳しく見る",
@@ -295,7 +295,7 @@ export const locales = {
     ],
     privacyWeb:
       "このサイトはアクセス解析、広告Cookie、外部フォントを使用しません。ページと画像の読み込みのため、ブラウザはサイトのホストに接続します。Mac App StoreへのリンクはAppleのサービスを開き、Apple独自のプライバシーポリシーが適用されます。",
-    rights: "Human Turn",
+    rights: "Fortyone Agency LLC",
   },
 };
 

@@ -36,6 +36,7 @@ menu still works.
 
 - `content/marketing/`: supplied App Store text, preserved in all five languages.
 - `content/site.mjs`: website-specific translations and localized App Store URLs.
+- `content/privacy.mjs`: privacy-policy translations and the fixed effective date.
 - `scripts/generate.mjs`: shared homepage and privacy-page templates.
 - `src/site.css`: responsive styles and reduced-motion support.
 - `src/main.ts`: gallery and menu interactions.
@@ -48,6 +49,14 @@ then run `npm run generate` (or restart `npm run dev`).
 
 The App Store ID is `6809105741`. Storefronts are `us`, `de`, `fr`, `es`, and
 `jp`, with explicit language parameters for each locale.
+
+Privacy policies are available at `/privacy/`, `/de/privacy/`, `/fr/privacy/`,
+`/es/privacy/`, and `/ja/privacy/`. They follow the Times policy's dated,
+section-based format with Human Turn-specific disclosures. Update
+`privacyEffectiveDate` only when revising the policy; unlike the copyright year,
+the policy revision date must not advance automatically. Review the text against
+actual app and hosting practices before publishing; it is not a legal compliance
+certification.
 
 ## Deployment
 

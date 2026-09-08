@@ -1,6 +1,7 @@
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { privacyEffectiveDate, privacyPolicies } from "../content/privacy.mjs";
 import {
   localePath as languagePath,
   locales,
@@ -143,7 +144,6 @@ function homePage(locale, marketing) {
       <img class="hero-scene" src="/assets/${locale}/hero.jpg" alt="${escape(copy.alts[0])}" width="1040" height="1300" fetchpriority="high">
       <div class="shell hero-inner">
         <div class="hero-copy">
-          <p class="kicker hero-eyebrow"><span class="status-dot"></span>${escape(copy.eyebrow)}</p>
           <h1>Human Turn<span class="title-period">.</span></h1>
           <p class="hero-tagline">${escape(marketing.subtitle)}</p>
           <p class="hero-lede">${escape(marketing.lead)}</p>
@@ -152,7 +152,7 @@ function homePage(locale, marketing) {
         </div>
       </div>
     </section>
-    <section class="integrations" aria-label="${escape(copy.integrations)}"><div class="shell integration-inner"><p>${escape(copy.integrations)}</p><ul><li>GitHub</li><li>GitLab</li><li>Bitbucket</li><li>Cursor</li><li>GitHub Copilot</li></ul></div></section>
+    <section class="integrations" aria-label="${escape(copy.integrations)}"><div class="shell integration-inner"><p>${escape(copy.integrations)}</p><ul><li>GitHub</li><li>GitLab</li><li>Bitbucket</li><li>Cursor</li></ul></div></section>
     <section class="overview shell section-space" id="features">
       <div class="section-heading"><p class="kicker">${escape(copy.features)}</p><h2>${escape(copy.intro)}</h2><p>${escape(marketing.intro)}</p></div>
       <div class="states" aria-label="${escape(marketing.stateIntro)}">${marketing.states.map((state, index) => `<article class="state state-${index}"><div class="state-label"><span class="status-dot"></span><h3>${escape(state.title)}</h3><span class="state-index" aria-hidden="true">0${index + 1}</span></div><p>${escape(state.text)}</p></article>`).join("")}</div>
@@ -173,10 +173,35 @@ function homePage(locale, marketing) {
 
 function privacyPage(locale, marketing) {
   const copy = locales[locale];
+  const policy = privacyPolicies[locale];
+  const effectiveDate = new Intl.DateTimeFormat(locale, {
+    dateStyle: "long",
+    timeZone: "UTC",
+  }).format(new Date(`${privacyEffectiveDate}T00:00:00Z`));
+  const section = (heading, paragraphs) =>
+    `<section><h2>${escape(heading)}</h2>${paragraphs.map((text) => `<p>${escape(text)}</p>`).join("")}</section>`;
   return layout(
     locale,
     marketing,
-    `<article class="privacy-document shell section-space"><a class="text-link" href="${localePath(locale)}">← ${escape(copy.back)}</a><p class="kicker">Human Turn</p><h1>${escape(copy.privacyTitle)}</h1><p class="document-intro">${escape(copy.privacyIntro)}</p><h2>${escape(copy.privacyHeadings[0])}</h2><p>${escape(marketing.sections[6].text)}</p><p>${escape(marketing.sections[0].text)}</p><h2>${escape(copy.privacyHeadings[1])}</h2><p>${escape(marketing.sections[4].text)}</p><p>${escape(marketing.requirements)}</p><h2>${escape(copy.privacyHeadings[2])}</h2><p>${escape(marketing.sections[3].text)}</p><h2>${escape(copy.privacyHeadings[3])}</h2><p>${escape(copy.privacyWeb)}</p></article>`,
+    `<article class="privacy-document shell section-space">
+      <a class="text-link" href="${localePath(locale)}">← ${escape(copy.back)}</a>
+      <p class="kicker">Human Turn</p>
+      <h1>${escape(policy.title)}</h1>
+      <p class="document-intro">${escape(copy.privacyIntro)}</p>
+      <p>${escape(policy.effective)} <time datetime="${privacyEffectiveDate}">${escape(effectiveDate)}</time></p>
+      ${section(policy.informationHeading, [policy.informationText])}
+      ${section(copy.privacyHeadings[0], [marketing.sections[6].text, marketing.sections[0].text])}
+      ${section(policy.storageHeading, [policy.storageText])}
+      ${section(copy.privacyHeadings[1], [marketing.sections[4].text, marketing.requirements])}
+      ${section(copy.privacyHeadings[2], [marketing.sections[3].text])}
+      ${section(policy.controlsHeading, [policy.controlsText])}
+      ${section(policy.storeHeading, [policy.storeText])}
+      <p><a href="https://www.apple.com/legal/privacy/">${escape(policy.applePolicy)}</a></p>
+      ${section(copy.privacyHeadings[3], [copy.privacyWeb, policy.websiteText])}
+      <p><a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">${escape(policy.hostingPolicy)}</a></p>
+      ${section(policy.changesHeading, [policy.changesText, policy.contactText])}
+      <p><a href="${escape(storeUrl(locale))}">${escape(policy.contactLabel)}</a></p>
+    </article>`,
     true,
   );
 }

@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFile, stat } from "node:fs/promises";
 import { resolve } from "node:path";
 import test from "node:test";
+import { privacyEffectiveDate, privacyPolicies } from "../content/privacy.mjs";
 import {
   localePath,
   locales,
@@ -21,6 +22,58 @@ const escape = (value) =>
   );
 
 for (const [locale, copy] of Object.entries(locales)) {
+  test(`${locale}: code sources row has the localized label and four sources`, async () => {
+    const html = await readFile(
+      resolve(`dist${localePath(locale)}index.html`),
+      "utf8",
+    );
+    assert.ok(!html.includes('class="kicker hero-eyebrow"'));
+    assert.ok(!html.includes(escape(copy.eyebrow)));
+    const row = html.match(
+      /<section class="integrations"[\s\S]*?<\/section>/,
+    )?.[0];
+    assert.ok(row, "Missing code sources row");
+    assert.ok(row.includes(`<p>${escape(copy.integrations)}</p>`));
+    assert.deepEqual(
+      [...row.matchAll(/<li>([^<]+)<\/li>/g)].map((match) => match[1]),
+      ["GitHub", "GitLab", "Bitbucket", "Cursor"],
+    );
+  });
+
+  test(`${locale}: privacy policy includes all translated sections and a fixed revision date`, async () => {
+    const policy = privacyPolicies[locale];
+    assert.deepEqual(
+      Object.keys(policy).sort(),
+      Object.keys(privacyPolicies.en).sort(),
+    );
+    const html = await readFile(
+      resolve(`dist${localePath(locale)}privacy/index.html`),
+      "utf8",
+    );
+    for (const text of Object.values(policy))
+      assert.ok(html.includes(escape(text)), `Missing policy text: ${text}`);
+    assert.ok(html.includes(`<h1>${escape(policy.title)}</h1>`));
+    assert.ok(html.includes(`<time datetime="${privacyEffectiveDate}">`));
+    assert.ok(
+      html.includes(
+        escape(
+          new Intl.DateTimeFormat(locale, {
+            dateStyle: "long",
+            timeZone: "UTC",
+          }).format(new Date(`${privacyEffectiveDate}T00:00:00Z`)),
+        ),
+      ),
+    );
+    assert.equal([...html.matchAll(/<h2>/g)].length, 9);
+    assert.ok(html.includes(`href="${escape(storeUrl(locale))}"`));
+    assert.ok(html.includes('href="https://www.apple.com/legal/privacy/"'));
+    assert.ok(
+      html.includes(
+        'href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"',
+      ),
+    );
+  });
+
   test(`${locale}: supplied marketing text is complete and preserved`, async () => {
     const marketing = parseMarketing(
       await readFile(`content/marketing/${locale}.txt`, "utf8"),
@@ -50,6 +103,12 @@ for (const [locale, copy] of Object.entries(locales)) {
       );
       assert.ok(html.includes(`<html lang="${locale}">`));
       assert.ok(html.includes(escape(copy.privacy)));
+      assert.ok(
+        html.includes(
+          `<p>© <span data-year>${new Date().getFullYear()}</span> Fortyone Agency LLC</p>`,
+        ),
+        "Footer must use the current year and Fortyone Agency LLC",
+      );
       assert.equal([...html.matchAll(/<h1[ >]/g)].length, 1);
       assert.ok(!html.includes("undefined"));
       for (const code of Object.keys(locales)) {
