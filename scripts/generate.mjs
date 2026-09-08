@@ -55,7 +55,7 @@ export function parseMarketing(source) {
 
 const arrow = '<span aria-hidden="true">↗</span>';
 const storeButton = (locale, small = false) =>
-  `<a class="button${small ? " button-small" : ""}" href="${escape(storeUrl(locale))}">${escape(small ? locales[locale].download : locales[locale].appStore)} ${arrow}</a>`;
+  `<a class="button${small ? " button-small" : ""}" href="${escape(storeUrl(locale))}">${escape(small ? locales[locale].download : locales[locale].appStore)}</a>`;
 
 function languageMenu(locale, privacy) {
   return `<details class="language-menu"><summary>${escape(locales[locale].name)}<span aria-hidden="true">⌄</span></summary><nav aria-label="${escape(locales[locale].language)}">${Object.entries(
@@ -147,7 +147,7 @@ function homePage(locale, marketing) {
           <h1>Human Turn<span class="title-period">.</span></h1>
           <p class="hero-tagline">${escape(marketing.subtitle)}</p>
           <p class="hero-lede">${escape(marketing.lead)}</p>
-          <div class="hero-actions">${storeButton(locale)}<a class="text-link" href="#screenshots">${escape(copy.tour)} <span aria-hidden="true">↓</span></a></div>
+          <div class="hero-actions">${storeButton(locale)}<a class="text-link" href="#screenshots">${escape(copy.tour)}</a></div>
           <p class="availability">${escape(copy.requirement)}</p>
         </div>
       </div>
