@@ -51,21 +51,42 @@ The App Store ID is `6809105741`. Storefronts are `us`, `de`, `fr`, `es`, and
 
 ## Deployment
 
-Deploy the contents of `dist/` to the root of a static website. No backend,
-runtime environment variables, external fonts, or analytics service is needed.
-The build is self-contained and does not require the neighboring app repository.
+The repository uses GitHub Pages with **Settings > Pages > Build and deployment
+> Source: GitHub Actions**. Its configured custom domain is
+`human-turn.fortyoneagency.com`.
 
-Set the actual public origin at build time to generate absolute canonical,
-Open Graph, and language-alternate URLs, plus a sitemap and robots file:
+The `Check and deploy website` workflow in `.github/workflows/check.yml`:
+
+1. Installs dependencies and runs the production build, TypeScript, lint, and tests.
+2. Reads the actual Pages URL with `actions/configure-pages` and supplies it as
+	`SITE_URL`, including a repository subpath when applicable.
+3. Uploads `dist/` with `actions/upload-pages-artifact`.
+4. Deploys with `actions/deploy-pages` using the `github-pages` environment.
+
+Pushes to `main` deploy automatically after checks pass. Pull requests only run
+checks and never deploy. You can also choose **Actions > Check and deploy
+website > Run workflow** on `main`. Commit and push the workflow, code, and all
+five `content/marketing/*.txt` inputs together before the first deployment.
+
+No personal access token or additional repository secret is required. Only the
+deployment job has Pages write and OIDC permissions. Existing custom-domain
+settings are preserved; this workflow does not change DNS.
+
+To reproduce the custom-domain build locally:
 
 ```sh
-SITE_URL=https://your-domain.example npm run check
+SITE_URL=https://human-turn.fortyoneagency.com npm run check
 ```
 
-Use an origin without a subdirectory. Without `SITE_URL`, local previews still
-work, but canonical URLs and a sitemap are intentionally omitted rather than
-publishing an invented domain. GitHub Actions runs the checks on pushes and pull
-requests; deployment and DNS are not configured automatically.
+`SITE_URL` also supports a project URL such as
+`https://fortyone-agency.github.io/human-turn-site`. Both the generator and Vite
+use its path for links and assets. Absolute canonical, Open Graph, alternate
+language URLs, and the sitemap use the same deployment URL.
+
+Without `SITE_URL`, local development stays at `/`; canonical URLs, the sitemap,
+and robots file are omitted. After a production build, run `npm run dev` again
+to regenerate local links. The build is self-contained and does not require the
+neighboring app repository or a backend.
 
 Privacy-page content is based on the supplied app description. Review it against
 your final hosting configuration before publishing.

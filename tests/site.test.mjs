@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile, stat } from "node:fs/promises";
 import { resolve } from "node:path";
 import test from "node:test";
-import { localePath, locales, storeUrl } from "../content/site.mjs";
+import { localePath, locales, site, sitePath, storeUrl } from "../content/site.mjs";
 import { parseMarketing } from "../scripts/generate.mjs";
 
 const escape = (value) =>
@@ -49,16 +49,24 @@ for (const [locale, copy] of Object.entries(locales)) {
       for (const code of Object.keys(locales)) {
         assert.ok(
           html.includes(
-            `href="${localePath(code)}${suffix}" lang="${code}" hreflang="${code}"`,
+            `href="${sitePath(localePath(code))}${suffix}" lang="${code}" hreflang="${code}"`,
           ),
         );
         assert.ok(html.includes(`hreflang="${code}"`));
       }
-      for (const match of html.matchAll(/(?:src|href)="(\/assets\/[^"#]+)"/g)) {
+      for (const match of html.matchAll(/(?:src|href)="(\/[^"#]*)"/g)) {
+        assert.ok(match[1].startsWith(sitePath("/")), `Link escapes deployment path: ${match[1]}`);
+        const assetPath = match[1].slice(site.basePath.length);
+        if (!assetPath.startsWith("/assets/")) continue;
         assert.ok(
-          (await stat(resolve(`dist${match[1]}`))).size > 0,
+          (await stat(resolve(`dist${assetPath}`))).size > 0,
           `Missing asset: ${match[1]}`,
         );
+      }
+      if (site.origin) {
+        const canonical = site.origin + sitePath(localePath(locale) + suffix);
+        assert.ok(html.includes(`<link rel="canonical" href="${canonical}">`));
+        assert.ok(html.includes(`content="${site.origin}${sitePath(`/assets/${locale}/1.jpg`)}"`));
       }
     }
   });
@@ -105,4 +113,20 @@ test("malformed source marketing text fails explicitly", () => {
       ),
     /Expected 19/,
   );
+});
+
+test("sitemap and robots respect the deployment URL", async () => {
+  if (!site.origin) {
+    await assert.rejects(stat("dist/sitemap.xml"), { code: "ENOENT" });
+    await assert.rejects(stat("dist/robots.txt"), { code: "ENOENT" });
+    return;
+  }
+  const sitemap = await readFile("dist/sitemap.xml", "utf8");
+  const robots = await readFile("dist/robots.txt", "utf8");
+  for (const locale of Object.keys(locales)) {
+    for (const suffix of ["", "privacy/"]) {
+      assert.ok(sitemap.includes(`<loc>${site.origin}${sitePath(localePath(locale) + suffix)}</loc>`));
+    }
+  }
+  assert.ok(robots.includes(`Sitemap: ${site.origin}${sitePath("/sitemap.xml")}`));
 });

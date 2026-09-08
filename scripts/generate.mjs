@@ -1,7 +1,9 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { localePath, locales, site, storeUrl } from "../content/site.mjs";
+import { localePath as languagePath, locales, site, sitePath, storeUrl } from "../content/site.mjs";
+
+const localePath = (locale) => sitePath(languagePath(locale));
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const escape = (value) =>
@@ -77,7 +79,7 @@ function layout(locale, marketing, body, privacy = false) {
   <meta property="og:type" content="website">
   <meta property="og:title" content="${escape(title)}">
   <meta property="og:description" content="${escape(marketing.intro)}">
-  <meta property="og:image" content="${escape(site.origin.replace(/\/$/, ""))}/assets/${locale}/1.jpg">
+  <meta property="og:image" content="${escape(site.origin + sitePath(`/assets/${locale}/1.jpg`))}">
   <meta name="twitter:card" content="summary_large_image">
   ${canonical ? `<link rel="canonical" href="${escape(canonical)}"><meta property="og:url" content="${escape(canonical)}">` : ""}
   ${Object.keys(locales)
@@ -86,7 +88,7 @@ function layout(locale, marketing, body, privacy = false) {
         `<link vite-ignore rel="alternate" hreflang="${code}" href="${escape(site.origin.replace(/\/$/, ""))}${localePath(code)}${privacy ? "privacy/" : ""}">`,
     )
     .join("\n  ")}
-  <link vite-ignore rel="alternate" hreflang="x-default" href="${escape(site.origin.replace(/\/$/, ""))}/${privacy ? "privacy/" : ""}">
+  <link vite-ignore rel="alternate" hreflang="x-default" href="${escape(site.origin + sitePath("/"))}${privacy ? "privacy/" : ""}">
   <link rel="icon" type="image/png" href="/assets/human-turn.png">
   <link rel="apple-touch-icon" href="/assets/human-turn.png">
   <title>${escape(title)}</title>
@@ -151,8 +153,8 @@ function homePage(locale, marketing) {
     </section>
     <section class="gallery-band" id="screenshots"><div class="shell section-space">
       <div class="section-heading"><p class="kicker">${escape(copy.screenshotKicker)}</p><h2>${escape(copy.screenshots)}</h2></div>
-      <nav class="gallery-tabs" aria-label="${escape(copy.screenshotKicker)}">${copy.tabs.map((tab, index) => `<a href="/assets/${locale}/${index + 1}.jpg" data-shot="${index}" data-alt="${escape(copy.alts[index])}"${index === 0 ? ' aria-current="true"' : ""}>${escape(tab)}</a>`).join("")}</nav>
-      <figure class="gallery-figure"><a data-enlarge href="/assets/${locale}/1.jpg" aria-label="${escape(copy.openImage)}"><img id="gallery-image" src="/assets/${locale}/1.jpg" alt="${escape(copy.alts[0])}" width="1800" height="1125" loading="lazy"><span class="enlarge-label">${escape(copy.openImage)} ${arrow}</span></a><figcaption id="gallery-caption" aria-live="polite">${escape(copy.tabs[0])}</figcaption></figure>
+      <nav class="gallery-tabs" aria-label="${escape(copy.screenshotKicker)}">${copy.tabs.map((tab, index) => `<a href="${sitePath(`/assets/${locale}/${index + 1}.jpg`)}" data-shot="${index}" data-alt="${escape(copy.alts[index])}"${index === 0 ? ' aria-current="true"' : ""}>${escape(tab)}</a>`).join("")}</nav>
+      <figure class="gallery-figure"><a data-enlarge href="${sitePath(`/assets/${locale}/1.jpg`)}" aria-label="${escape(copy.openImage)}"><img id="gallery-image" src="/assets/${locale}/1.jpg" alt="${escape(copy.alts[0])}" width="1800" height="1125" loading="lazy"><span class="enlarge-label">${escape(copy.openImage)} ${arrow}</span></a><figcaption id="gallery-caption" aria-live="polite">${escape(copy.tabs[0])}</figcaption></figure>
     </div></section>
     <section class="shell section-space feature-grid">${feature(0)}${feature(1)}${feature(2)}${feature(3)}</section>
     <section class="intelligence-band"><div class="shell section-space intelligence-grid">${feature(4)}<div class="intelligence-note"><p class="monogram" aria-hidden="true">Aa<span>✦</span></p><p class="requirements">${escape(marketing.requirements)}</p></div></div></section>
@@ -198,8 +200,12 @@ async function generate() {
     );
     await writeFile(
       resolve(root, "public/robots.txt"),
-      `User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`,
+      `User-agent: *\nAllow: /\nSitemap: ${origin}${sitePath("/sitemap.xml")}\n`,
     );
+  } else {
+    await Promise.all(["sitemap.xml", "robots.txt"].map((file) =>
+      rm(resolve(root, "public", file), { force: true }),
+    ));
   }
   console.log("Generated 5 localized homepages and 5 privacy pages.");
 }

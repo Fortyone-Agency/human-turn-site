@@ -1,8 +1,15 @@
+const deploymentUrl = process.env.SITE_URL
+  ? new URL(process.env.SITE_URL)
+  : null;
+
 export const site = {
-  origin: process.env.SITE_URL || "",
+  origin: deploymentUrl?.origin || "",
+  basePath: deploymentUrl?.pathname.replace(/\/$/, "") || "",
   appId: "6809105741",
   name: "Human Turn",
 };
+
+export const sitePath = (path) => `${site.basePath}${path}`;
 
 export const locales = {
   en: {

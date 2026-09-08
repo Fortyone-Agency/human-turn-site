@@ -1,0 +1,52 @@
+Name
+Human Turn
+
+Subtitle
+Tu código te necesita
+
+Promotional Text
+Deja de revisar tus pull requests sin parar. Human Turn sigue revisiones, CI y agentes de código, y te avisa discretamente cuando necesitas intervenir.
+
+Description
+Deja de revisar tus pull requests sin parar.
+
+Human Turn sigue revisiones, CI y agentes de código desde la barra de menús de tu Mac y te muestra cuándo hace falta tu atención.
+
+Consulta todas las pull requests que sigues en una vista clara:
+
+- Te toca: solicitudes de revisión, cambios solicitados, comprobaciones fallidas, agentes que han terminado y trabajo listo para fusionar.
+- En espera: trabajo que sigue en manos de un agente, la CI o un revisor.
+- Indeterminado: señales incompletas o ambiguas sobre las que Human Turn no hace suposiciones.
+
+CONECTA TU TRABAJO
+
+Sigue pull requests de GitHub, GitLab, Bitbucket Cloud y Cursor Origin. Consulta el trabajo de los agentes de código de Cursor Cloud Agents y GitHub Copilot junto a las pull requests correspondientes.
+
+VUELVE EN EL MOMENTO JUSTO
+
+Human Turn puede avisarte cuando te toca retomar el trabajo, un agente necesita tu respuesta o falla, o una pull request está lista para fusionar. Los intervalos entre avisos y los controles por repositorio mantienen las notificaciones útiles, sin interrupciones innecesarias.
+
+MANTÉN LA CONCENTRACIÓN
+
+Pospón un elemento durante una hora, hasta mañana o hasta que lleguen nuevos commits. Silencia repositorios, ignora elementos individuales y ordena el trabajo por el tiempo que lleva esperando. Abre directamente la pull request, la comprobación fallida o la ejecución del agente cuando quieras intervenir.
+
+DELEGA LAS REVISIONES
+
+Copia una instrucción /review lista para usar con una pull request y pégala en el agente de código que ya utilizas. Human Turn no ejecuta herramientas, no modifica tu código ni te exige elegir un agente preferido.
+
+CONSULTA QUÉ HA CAMBIADO
+
+Human Turn recuerda la última revisión que abriste e indica si han llegado nuevos commits. En los Mac compatibles, los resúmenes opcionales de cambios utilizan Apple Intelligence en el dispositivo. No se envían código, parches, nombres de repositorios, identidades de cuentas ni credenciales a un servidor de resúmenes.
+
+DISEÑADO PARA LA BARRA DE MENÚS
+
+Human Turn es una app nativa de macOS que no ocupa espacio en el Dock. Se actualiza discretamente en segundo plano, admite navegación con el teclado, puede iniciarse al abrir sesión y mantiene el estado de tu trabajo a mano.
+
+PRIVACIDAD DESDE EL DISEÑO
+
+Human Turn funciona localmente en tu Mac. Las credenciales se guardan en el llavero y solo se envían a los servicios que conectas, nunca a los servidores de Human Turn. La app consulta tu actividad de desarrollo sin fusionar pull requests ni modificar repositorios.
+
+Human Turn requiere macOS 14 o posterior. Los resúmenes de cambios con Apple Intelligence requieren macOS 26 o posterior, un Mac compatible y Apple Intelligence activado con su modelo descargado.
+
+Keywords
+pull,request,revisión,desarrollo,github,gitlab,bitbucket,cursor,CI,automatización,fusión,agente
