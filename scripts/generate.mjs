@@ -134,6 +134,7 @@ function layout(locale, marketing, body, privacy = false) {
 
 function homePage(locale, marketing) {
   const copy = locales[locale];
+  const screenshotOrder = [1, 2, 4, 3];
   const feature = (index, extra = "") =>
     `<article class="feature-copy ${extra}"><p class="kicker">${escape(marketing.sections[index].heading)}</p><h2>${escape(copy.featureTitles[index])}</h2><p>${escape(marketing.sections[index].text)}</p></article>`;
   return layout(
@@ -159,7 +160,7 @@ function homePage(locale, marketing) {
     </section>
     <section class="gallery-band" id="screenshots"><div class="shell section-space">
       <div class="section-heading"><p class="kicker">${escape(copy.screenshotKicker)}</p><h2>${escape(copy.screenshots)}</h2></div>
-      <nav class="gallery-tabs" aria-label="${escape(copy.screenshotKicker)}">${copy.tabs.map((tab, index) => `<a href="${sitePath(`/assets/${locale}/${index + 1}.jpg`)}" data-shot="${index}" data-alt="${escape(copy.alts[index])}"${index === 0 ? ' aria-current="true"' : ""}>${escape(tab)}</a>`).join("")}</nav>
+      <nav class="gallery-tabs" aria-label="${escape(copy.screenshotKicker)}">${copy.tabs.map((tab, index) => `<a href="${sitePath(`/assets/${locale}/${screenshotOrder[index]}.jpg`)}" data-shot="${index}" data-alt="${escape(copy.alts[index])}"${index === 0 ? ' aria-current="true"' : ""}>${escape(tab)}</a>`).join("")}</nav>
       <figure class="gallery-figure"><a data-enlarge href="${sitePath(`/assets/${locale}/1.jpg`)}" aria-label="${escape(copy.openImage)}"><img id="gallery-image" src="/assets/${locale}/1.jpg" alt="${escape(copy.alts[0])}" width="1800" height="1125" loading="lazy"><span class="enlarge-label">${escape(copy.openImage)} ${arrow}</span></a><figcaption id="gallery-caption" aria-live="polite">${escape(copy.tabs[0])}</figcaption></figure>
     </div></section>
     <section class="shell section-space feature-grid">${feature(0)}${feature(1)}${feature(2)}${feature(3)}</section>

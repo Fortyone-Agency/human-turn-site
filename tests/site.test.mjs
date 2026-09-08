@@ -150,10 +150,14 @@ for (const [locale, copy] of Object.entries(locales)) {
     );
     assert.equal(copy.tabs.length, 4);
     assert.equal(copy.alts.length, 4);
+    const screenshotOrder = [1, 2, 4, 3];
     for (let index = 0; index < 4; index++) {
-      assert.ok(html.includes(`/assets/${locale}/${index + 1}.jpg`));
-      assert.ok(html.includes(escape(copy.tabs[index])));
-      assert.ok(html.includes(escape(copy.alts[index])));
+      assert.ok(
+        html.includes(
+          `<a href="${sitePath(`/assets/${locale}/${screenshotOrder[index]}.jpg`)}" data-shot="${index}" data-alt="${escape(copy.alts[index])}"${index === 0 ? ' aria-current="true"' : ""}>${escape(copy.tabs[index])}</a>`,
+        ),
+        `Screenshot must match tab ${index} and its alt text`,
+      );
     }
     assert.deepEqual(Object.keys(copy).sort(), Object.keys(locales.en).sort());
   });
