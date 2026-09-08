@@ -1,7 +1,7 @@
-import { resolve } from 'node:path';
-import { defineConfig } from 'vite';
+import { resolve } from "node:path";
+import { defineConfig } from "vite";
 
-const languages = ['', 'de/', 'fr/', 'es/', 'ja/'];
+const languages = ["", "de/", "fr/", "es/", "ja/"];
 
 export default defineConfig({
   build: {
