@@ -173,9 +173,21 @@ for (const [locale, copy] of Object.entries(locales)) {
     ];
     assert.equal(links.length, 3);
     for (const link of links) assert.equal(link[1], escape(storeUrl(locale)));
-    assert.ok(html.includes(`<a class="button button-small" href="${escape(storeUrl(locale))}">${escape(copy.download)}</a>`));
-    assert.ok(html.includes(`<a class="button" href="${escape(storeUrl(locale))}">${escape(copy.appStore)}</a>`));
-    assert.ok(html.includes(`<a class="text-link" href="#screenshots">${escape(copy.tour)}</a>`));
+    assert.ok(
+      html.includes(
+        `<a class="button button-small" href="${escape(storeUrl(locale))}">${escape(copy.download)}</a>`,
+      ),
+    );
+    assert.ok(
+      html.includes(
+        `<a class="button" href="${escape(storeUrl(locale))}">${escape(copy.appStore)}</a>`,
+      ),
+    );
+    assert.ok(
+      html.includes(
+        `<a class="text-link" href="#screenshots">${escape(copy.tour)}</a>`,
+      ),
+    );
   });
 }
 
