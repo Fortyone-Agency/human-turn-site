@@ -51,15 +51,16 @@ The App Store ID is `6809105741`. Storefronts are `us`, `de`, `fr`, `es`, and
 
 ## Deployment
 
-The repository uses GitHub Pages with **Settings > Pages > Build and deployment
-> Source: GitHub Actions**. Its configured custom domain is
-`human-turn.fortyoneagency.com`.
+The repository uses GitHub Pages with \*\*Settings > Pages > Build and deployment
+
+> Source: GitHub Actions\*\*. Its configured custom domain is
+> `human-turn.fortyoneagency.com`.
 
 The `Check and deploy website` workflow in `.github/workflows/check.yml`:
 
 1. Installs dependencies and runs the production build, TypeScript, lint, and tests.
 2. Reads the actual Pages URL with `actions/configure-pages` and supplies it as
-	`SITE_URL`, including a repository subpath when applicable.
+   `SITE_URL`, including a repository subpath when applicable.
 3. Uploads `dist/` with `actions/upload-pages-artifact`.
 4. Deploys with `actions/deploy-pages` using the `github-pages` environment.
 

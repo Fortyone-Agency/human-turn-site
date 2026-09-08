@@ -1,7 +1,13 @@
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { localePath as languagePath, locales, site, sitePath, storeUrl } from "../content/site.mjs";
+import {
+  localePath as languagePath,
+  locales,
+  site,
+  sitePath,
+  storeUrl,
+} from "../content/site.mjs";
 
 const localePath = (locale) => sitePath(languagePath(locale));
 
@@ -203,9 +209,11 @@ async function generate() {
       `User-agent: *\nAllow: /\nSitemap: ${origin}${sitePath("/sitemap.xml")}\n`,
     );
   } else {
-    await Promise.all(["sitemap.xml", "robots.txt"].map((file) =>
-      rm(resolve(root, "public", file), { force: true }),
-    ));
+    await Promise.all(
+      ["sitemap.xml", "robots.txt"].map((file) =>
+        rm(resolve(root, "public", file), { force: true }),
+      ),
+    );
   }
   console.log("Generated 5 localized homepages and 5 privacy pages.");
 }
