@@ -192,6 +192,17 @@ for (const [locale, copy] of Object.entries(locales)) {
         `<a class="text-link" href="#screenshots">${escape(copy.tour)}</a>`,
       ),
     );
+    assert.equal(
+      [...html.matchAll(new RegExp(escape(copy.purchase), "g"))].length,
+      2,
+      "Purchase model must appear beside both primary calls to action",
+    );
+    assert.equal(
+      [...html.matchAll(new RegExp(escape(copy.introductoryPrice), "g"))]
+        .length,
+      2,
+      "Introductory price must appear beside both primary calls to action",
+    );
   });
 }
 
