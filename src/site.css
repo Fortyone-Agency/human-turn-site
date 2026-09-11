@@ -305,8 +305,23 @@ p {
 .text-link:hover {
   color: var(--green);
 }
+.purchase-details {
+  width: fit-content;
+  max-width: 460px;
+  margin-top: 18px;
+}
+.introductory-price {
+  padding: 10px 14px;
+  border-left: 4px solid #bc7110;
+  border-radius: 3px;
+  background: #fff1d7;
+  color: #633900;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.45;
+}
 .availability {
-  margin-top: 17px;
+  margin-top: 7px;
   color: var(--muted);
   font-size: 11px;
 }
@@ -550,6 +565,10 @@ p {
   margin: 20px auto 26px;
   color: var(--muted);
   font-size: 16px;
+}
+.final-cta .purchase-details {
+  margin-inline: auto;
+  text-align: left;
 }
 .site-footer {
   display: flex;

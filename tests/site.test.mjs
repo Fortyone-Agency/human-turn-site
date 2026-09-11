@@ -202,6 +202,13 @@ for (const [locale, copy] of Object.entries(locales)) {
       2,
       "Introductory price must appear beside both primary calls to action",
     );
+    assert.equal(
+      html.split(
+        `<p class="introductory-price">${escape(copy.introductoryPrice)}</p>`,
+      ).length - 1,
+      2,
+      "Introductory price must use the prominent offer treatment",
+    );
   });
 }
 

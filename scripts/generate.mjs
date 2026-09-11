@@ -149,7 +149,7 @@ function homePage(locale, marketing) {
           <p class="hero-tagline">${escape(marketing.subtitle)}</p>
           <p class="hero-lede">${escape(marketing.lead)}</p>
           <div class="hero-actions">${storeButton(locale)}<a class="text-link" href="#screenshots">${escape(copy.tour)}</a></div>
-          <p class="availability">${escape(copy.introductoryPrice)} ${escape(copy.purchase)} ${escape(copy.requirement)}</p>
+          <div class="purchase-details"><p class="introductory-price">${escape(copy.introductoryPrice)}</p><p class="availability">${escape(copy.purchase)} ${escape(copy.requirement)}</p></div>
         </div>
       </div>
     </section>
@@ -166,7 +166,7 @@ function homePage(locale, marketing) {
     <section class="shell section-space feature-grid">${feature(0)}${feature(1)}${feature(2)}${feature(3)}</section>
     <section class="intelligence-band"><div class="shell section-space intelligence-grid">${feature(4)}<div class="intelligence-note"><p class="monogram" aria-hidden="true">Aa<span>✦</span></p><p class="requirements">${escape(marketing.requirements)}</p></div></div></section>
     <section class="privacy-band"><div class="shell section-space privacy-grid">${feature(5)}<div>${feature(6)}<a class="text-link" href="${localePath(locale)}privacy/">${escape(copy.privacy)} ${arrow}</a></div></div></section>
-    <section class="final-cta shell section-space"><img src="/assets/human-turn.png" alt="" width="80" height="80"><h2>${escape(copy.closing)}</h2><p>${escape(copy.closingText)}</p>${storeButton(locale)}<p class="availability">${escape(copy.introductoryPrice)} ${escape(copy.purchase)} ${escape(copy.requirement)}</p></section>
+    <section class="final-cta shell section-space"><img src="/assets/human-turn.png" alt="" width="80" height="80"><h2>${escape(copy.closing)}</h2><p>${escape(copy.closingText)}</p>${storeButton(locale)}<div class="purchase-details"><p class="introductory-price">${escape(copy.introductoryPrice)}</p><p class="availability">${escape(copy.purchase)} ${escape(copy.requirement)}</p></div></section>
     <dialog class="lightbox" aria-label="${escape(copy.screenshotKicker)}"><form method="dialog"><button class="close-lightbox" aria-label="${escape(copy.close)}" title="${escape(copy.close)}">×</button></form><img src="/assets/${locale}/1.jpg" alt="${escape(copy.alts[0])}" width="1800" height="1125"></dialog>
   `,
   );
