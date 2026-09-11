@@ -193,13 +193,12 @@ for (const [locale, copy] of Object.entries(locales)) {
       ),
     );
     assert.equal(
-      [...html.matchAll(new RegExp(escape(copy.purchase), "g"))].length,
+      html.split(escape(copy.purchase)).length - 1,
       2,
       "Purchase model must appear beside both primary calls to action",
     );
     assert.equal(
-      [...html.matchAll(new RegExp(escape(copy.introductoryPrice), "g"))]
-        .length,
+      html.split(escape(copy.introductoryPrice)).length - 1,
       2,
       "Introductory price must appear beside both primary calls to action",
     );
