@@ -100,3 +100,7 @@ neighboring app repository or a backend.
 
 Privacy-page content is based on the supplied app description. Review it against
 your final hosting configuration before publishing.
+
+## Copyright
+
+© 2026 Fortyone Agency LLC. All rights reserved.
