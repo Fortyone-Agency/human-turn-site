@@ -193,9 +193,10 @@ for (const [locale, copy] of Object.entries(locales)) {
       ),
     );
     assert.equal(
-      html.split(escape(copy.purchase)).length - 1,
+      html.split(`<p class="availability">${escape(copy.requirement)}</p>`)
+        .length - 1,
       2,
-      "Purchase model must appear beside both primary calls to action",
+      "Only the system requirement must appear beside both primary calls to action",
     );
     assert.doesNotMatch(
       html,
