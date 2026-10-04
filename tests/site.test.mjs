@@ -197,17 +197,10 @@ for (const [locale, copy] of Object.entries(locales)) {
       2,
       "Purchase model must appear beside both primary calls to action",
     );
-    assert.equal(
-      html.split(escape(copy.introductoryPrice)).length - 1,
-      2,
-      "Introductory price must appear beside both primary calls to action",
-    );
-    assert.equal(
-      html.split(
-        `<p class="introductory-price">${escape(copy.introductoryPrice)}</p>`,
-      ).length - 1,
-      2,
-      "Introductory price must use the prominent offer treatment",
+    assert.doesNotMatch(
+      html,
+      /introductory-price|9[.,]99/,
+      "Promotional price banners must not appear",
     );
   });
 }

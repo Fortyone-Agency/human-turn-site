@@ -23,8 +23,6 @@ export const locales = {
     tour: "Take a closer look",
     eyebrow: "A quieter workflow. A native Mac app.",
     requirement: "For macOS 14 and later",
-    introductoryPrice:
-      "Introductory purchase price: $9.99 USD. Available through October 15.",
     purchase: "One-time purchase. No subscription.",
     integrations: "Your code sources. One place.",
     intro: "Less checking. More doing.",
@@ -84,8 +82,6 @@ export const locales = {
     tour: "Die App entdecken",
     eyebrow: "Weniger Unterbrechungen. Eine native Mac-App.",
     requirement: "Für macOS 14 oder neuer",
-    introductoryPrice:
-      "Einführungspreis: 9,99 USD. Erhältlich bis einschließlich 15. Oktober.",
     purchase: "Einmaliger Kauf. Kein Abonnement.",
     integrations: "Deine Codequellen. Ein Ort.",
     intro: "Weniger prüfen. Mehr schaffen.",
@@ -145,8 +141,6 @@ export const locales = {
     tour: "Découvrir l’app",
     eyebrow: "Moins d’interruptions. Une app Mac native.",
     requirement: "Pour macOS 14 ou ultérieur",
-    introductoryPrice:
-      "Prix de lancement : 9,99 USD. Disponible jusqu’au 15 octobre inclus.",
     purchase: "Achat unique. Sans abonnement.",
     integrations: "Vos sources de code. Un seul lieu.",
     intro: "Moins vérifier. Plus avancer.",
@@ -206,8 +200,6 @@ export const locales = {
     tour: "Descubre la app",
     eyebrow: "Menos interrupciones. Una app nativa para Mac.",
     requirement: "Para macOS 14 o posterior",
-    introductoryPrice:
-      "Precio de lanzamiento: 9,99 USD. Disponible hasta el 15 de octubre inclusive.",
     purchase: "Compra única. Sin suscripción.",
     integrations: "Tus fuentes de código. Un lugar.",
     intro: "Menos comprobar. Más avanzar.",
@@ -267,7 +259,6 @@ export const locales = {
     tour: "アプリを見る",
     eyebrow: "作業を静かに見守る、Macネイティブアプリ。",
     requirement: "macOS 14以降に対応",
-    introductoryPrice: "導入価格：9.99米ドル。10月15日まで。",
     purchase: "買い切り。サブスクリプションはありません。",
     integrations: "コードの接続先を、ひとつに。",
     intro: "確認を減らして、作業を前へ。",
